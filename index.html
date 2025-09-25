@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic Tương Tác: Bộ Kỹ Năng Toàn Diện Của Marketer Chuyên Nghiệp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan:
+    The infographic's narrative guides the user from foundational concepts to practical application. It starts by defining the two core skill pillars (Hard & Soft), allows for an interactive deep-dive into each specific skill, synthesizes this knowledge by visualizing skill requirements for different job roles, and concludes with an actionable development plan.
+    Structure:
+    1. Hero Section: A strong hook about the modern marketer.
+    2. Core Skills Section: A side-by-side introduction to Hard vs. Soft skills.
+    3. Interactive Skill Explorer: Two tabbed sections for Hard and Soft skills. Users can click on a skill to reveal its details (definition, tools, exercises), making the content digestible and user-driven.
+    4. "Which Role Fits You?" Synthesizer: A dynamic radar chart that updates based on a user's selection from a dropdown menu of job roles. This is the main interactive data visualization piece.
+    5. Action Plan Section: A clear, well-structured table presenting a sample 30-day skill development plan.
+    This structure was chosen to transform a linear text document into an engaging, multi-layered exploratory tool that promotes active learning over passive reading.
+    -->
+    <!-- Visualization & Content Choices:
+    - Hard vs. Soft Skills (Compare): Styled cards (HTML/CSS) with Unicode icons to visually separate the two concepts.
+    - Skill Explorer (Organize/Inform): An interactive tab system (JS) to present detailed information without overwhelming the user.
+    - Skills by Job Role (Compare/Relationships): A dynamic Radar Chart (Chart.js) was chosen as it is the most effective way to visually represent the "shape" of a job profile across multiple skill dimensions simultaneously. It provides an immediate, comparable snapshot for different roles. Interaction is driven by a dropdown menu that updates the chart's data.
+    - 30-Day Plan (Organize): A styled HTML table is the clearest and most universally understood format for presenting a structured timeline.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .skill-tab {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .skill-tab.active {
+            background-color: #3b82f6;
+            color: white;
+            box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-black gradient-text tracking-tight">Bộ Kỹ Năng Toàn Diện Của Marketer</h1>
+            <p class="text-lg md:text-xl text-gray-600 mt-4 max-w-3xl mx-auto">Một infographic tương tác giúp bạn khám phá những kỹ năng cần thiết để bứt phá trong sự nghiệp Marketing.</p>
+        </header>
+
+        <section class="mb-16">
+            <h2 class="section-title gradient-text">Hai Nửa Của Một Marketer Chuyên Nghiệp</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card text-center">
+                    <div class="text-6xl mb-4">🛠️</div>
+                    <h3 class="text-3xl font-bold text-blue-900 mb-2">Kỹ Năng Cứng (Hard Skills)</h3>
+                    <p class="text-gray-600">Là nền tảng chuyên môn, những công cụ bạn sử dụng để **thực thi** công việc. Đây là những kỹ năng có thể học và đo lường được.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="text-6xl mb-4">🤝</div>
+                    <h3 class="text-3xl font-bold text-blue-900 mb-2">Kỹ Năng Mềm (Soft Skills)</h3>
+                    <p class="text-gray-600">Là những thuộc tính cá nhân, cách bạn **tương tác** với con người và xử lý vấn đề. Đây là yếu tố quyết định sự thăng tiến.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="section-title gradient-text">Khám Phá Chi Tiết Từng Kỹ Năng</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12 -mt-4">Chọn một kỹ năng để xem định nghĩa, ví dụ và bài tập thực hành nhỏ.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Hard Skills Section -->
+                <div>
+                    <h3 class="text-2xl font-bold text-center mb-6">🛠️ Kỹ Năng Cứng</h3>
+                    <div class="flex flex-wrap justify-center gap-3 mb-6" id="hard-skills-tabs">
+                        <button data-target="hs-data" class="skill-tab active bg-white text-gray-700 font-medium py-2 px-5 rounded-full shadow-sm">Phân tích Dữ liệu</button>
+                        <button data-target="hs-tools" class="skill-tab bg-white text-gray-700 font-medium py-2 px-5 rounded-full shadow-sm">Công cụ Digital</button>
+                        <button data-target="hs-content" class="skill-tab bg-white text-gray-700 font-medium py-2 px-5 rounded-full shadow-sm">Sáng tạo Nội dung</button>
+                        <button data-target="hs-research" class="skill-tab bg-white text-gray-700 font-medium py-2 px-5 rounded-full shadow-sm">Nghiên cứu Thị trường</button>
+                    </div>
+                    <div id="hard-skills-content" class="card">
+                        <!-- Content will be injected here -->
+                    </div>
+                </div>
+                <!-- Soft Skills Section -->
+                <div>
+                    <h3 class="text-2xl font-bold text-center mb-6">🤝 Kỹ Năng Mềm</h3>
+                    <div class="flex flex-wrap justify-center gap-3 mb-6" id="soft-skills-tabs">
+                        <button data-target="ss-empathy" class="skill-tab active bg-white text-gray-700 font-medium py-2 px-5 rounded-full shadow-sm">Đồng cảm</button>
+                        <button data-target="ss-comm" class="skill-tab bg-white text-gray-700 font-medium py-2 px-5 rounded-full shadow-sm">Giao tiếp</button>
+                        <button data-target="ss-present" class="skill-tab bg-white text-gray-700 font-medium py-2 px-5 rounded-full shadow-sm">Thuyết trình</button>
+                        <button data-target="ss-adapt" class="skill-tab bg-white text-gray-700 font-medium py-2 px-5 rounded-full shadow-sm">Thích ứng</button>
+                    </div>
+                    <div id="soft-skills-content" class="card">
+                        <!-- Content will be injected here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="section-title gradient-text">Vị Trí Nào Phù Hợp Với Bạn?</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8 -mt-4">Mỗi vị trí trong ngành Marketing đòi hỏi một bộ kỹ năng với các trọng số khác nhau. Hãy chọn một vị trí để xem "hình dạng" kỹ năng yêu cầu và khám phá xem đâu là thế mạnh của bạn.</p>
+            <div class="card">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/3">
+                        <label for="role-selector" class="block text-sm font-medium text-gray-700 mb-2">Chọn vị trí công việc:</label>
+                        <select id="role-selector" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="content">Content Creator / Copywriter</option>
+                            <option value="performance">Performance Marketer (Ads)</option>
+                            <option value="seo">SEO Specialist</option>
+                            <option value="manager">Marketing Manager</option>
+                        </select>
+                        <div id="role-description" class="mt-4 text-gray-600 p-4 bg-gray-50 rounded-lg">
+                            <!-- Description will be injected here -->
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <div class="chart-container">
+                            <canvas id="role-skill-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="mb-16">
+            <h2 class="section-title gradient-text">Kế Hoạch Phát Triển Kỹ Năng Trong 30 Ngày</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8 -mt-4">Đây là một lộ trình mẫu giúp bạn rèn luyện có cấu trúc. Hãy tùy chỉnh để phù hợp với mục tiêu của riêng bạn.</p>
+            <div class="card overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-gray-50 text-gray-600">
+                        <tr>
+                            <th class="p-4 rounded-tl-lg">Tuần</th>
+                            <th class="p-4">Mục tiêu</th>
+                            <th class="p-4">Hành động (Kỹ năng cứng)</th>
+                            <th class="p-4 rounded-tr-lg">Hành động (Kỹ năng mềm)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y">
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-bold">Tuần 1</td>
+                            <td class="p-4">Nắm vững chỉ số</td>
+                            <td class="p-4">Xem video về cách đọc báo cáo Google Analytics.</td>
+                            <td class="p-4">Lên dàn ý 3 slide cho một chủ đề bất kỳ.</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-bold">Tuần 2</td>
+                            <td class="p-4">Thực hành tính toán</td>
+                            <td class="p-4">Dùng Excel tính CPA, ROAS từ dữ liệu giả định.</td>
+                            <td class="p-4">Thuyết trình thử dàn ý trước gương.</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-bold">Tuần 3</td>
+                            <td class="p-4">Tìm kiếm Insight</td>
+                            <td class="p-4">Đọc case study và tìm ra 1 insight quan trọng.</td>
+                            <td class="p-4">Thiết kế hoàn chỉnh 3 slide trên Canva.</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 font-bold">Tuần 4</td>
+                            <td class="p-4">Báo cáo & Trình bày</td>
+                            <td class="p-4">Viết báo cáo 1 trang và đưa ra đề xuất.</td>
+                            <td class="p-4">Trình bày hoàn chỉnh cho một nhóm nhỏ.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hardSkillsData = {
+                'hs-data': {
+                    title: 'Phân tích Dữ liệu (Data Analysis)',
+                    content: `Là kỹ năng "đọc vị" những con số để hiểu điều gì đang diễn ra, thay vì đoán mò. Bạn sẽ ra quyết định dựa trên bằng chứng từ các công cụ.`,
+                    tools: 'Công cụ: Google Analytics, Facebook Ads Manager, Excel/Google Sheets.',
+                    exercise: '<strong>Bài tập nhỏ:</strong> Mở một báo cáo quảng cáo đơn giản. Tìm chỉ số ROAS và nhận xét: "Chiến dịch này đang lời hay lỗ?".'
+                },
+                'hs-tools': {
+                    title: 'Công cụ Kỹ thuật số (Digital Tools)',
+                    content: `Là "bộ đồ nghề" của Marketer. Thành thạo các công cụ phổ biến giúp bạn làm việc nhanh hơn, chuyên nghiệp hơn và hiệu quả hơn.`,
+                    tools: 'Công cụ: Canva, Figma, Semrush, Mailchimp, Meta Business Suite.',
+                    exercise: '<strong>Bài tập nhỏ:</strong> Chọn 1 công cụ bạn chưa biết. Dành 15 phút truy cập website của họ và tìm hiểu 3 tính năng chính.'
+                },
+                'hs-content': {
+                    title: 'Sáng tạo Nội dung (Content Creation)',
+                    content: `Không chỉ là viết, mà còn là lên ý tưởng, viết kịch bản video, và quan trọng nhất là khả năng kể chuyện (Storytelling) chạm đến cảm xúc khách hàng.`,
+                    tools: 'Nền tảng: Blog, TikTok, Facebook, Email.',
+                    exercise: '<strong>Bài tập nhỏ:</strong> Viết kịch bản video TikTok 15 giây giới thiệu một đôi giày, tập trung vào cảm giác nó mang lại.'
+                },
+                'hs-research': {
+                    title: 'Nghiên cứu Thị trường (Market Research)',
+                    content: `Là kỹ năng "trinh sát" để hiểu rõ "chiến trường": khách hàng muốn gì, đối thủ đang làm gì, và thị trường đang có xu hướng nào.`,
+                    tools: 'Công cụ: Google Trends, Social Media Search, Google Forms.',
+                    exercise: '<strong>Bài tập nhỏ:</strong> Truy cập fanpage của 2 đối thủ. Ghi lại 1 điểm họ làm tốt hơn và 1 điểm họ làm chưa tốt.'
+                }
+            };
+
+            const softSkillsData = {
+                'ss-empathy': {
+                    title: 'Đồng cảm (Empathy)',
+                    content: `Kỹ năng mềm quan trọng nhất. Là khả năng đặt mình vào vị trí của khách hàng để thấu hiểu sâu sắc vấn đề và mong muốn của họ.`,
+                    tools: 'Áp dụng trong: Viết content, Phát triển sản phẩm, Dịch vụ khách hàng.',
+                    exercise: '<strong>Bài tập nhỏ:</strong> Tìm một quảng cáo. Trả lời câu hỏi: "Quảng cáo này đang cố gắng giải quyết \'nỗi đau\' thầm kín nào của khách hàng?".'
+                },
+                'ss-comm': {
+                    title: 'Giao tiếp (Communication)',
+                    content: `Bao gồm cả viết và nói. Là khả năng truyền đạt thông điệp một cách rõ ràng, súc tích và thuyết phục.`,
+                    tools: 'Áp dụng trong: Email, Báo cáo, Họp team, Trình bày ý tưởng.',
+                    exercise: '<strong>Bài tập nhỏ:</strong> Viết một email ngắn (dưới 150 từ) cho "sếp" để đề xuất một ý tưởng marketing mới.'
+                },
+                'ss-present': {
+                    title: 'Thuyết trình (Presentation)',
+                    content: `Là kỹ năng "bán" ý tưởng của bạn. Một kế hoạch hay cần được trình bày một cách thuyết phục trước sếp hoặc khách hàng.`,
+                    tools: 'Công cụ: PowerPoint, Canva, Google Slides.',
+                    exercise: '<strong>Bài tập nhỏ:</strong> Tạo 3 slide tóm tắt một chiến dịch marketing giả định (Mục tiêu, Ý tưởng, Kết quả kỳ vọng).'
+                },
+                'ss-adapt': {
+                    title: 'Thích ứng (Adaptability)',
+                    content: `Thế giới digital thay đổi mỗi ngày. Khả năng thích ứng là việc bạn luôn giữ tư duy cởi mở, sẵn sàng học hỏi cái mới và không sợ thất bại.`,
+                    tools: 'Áp dụng trong: Đối mặt với thay đổi thuật toán, Thử nghiệm kênh mới, Cập nhật xu hướng.',
+                    exercise: '<strong>Bài tập nhỏ:</strong> Kể tên một xu hướng marketing mới. Theo bạn, nó mang lại cơ hội và thách thức gì?'
+                }
+            };
+            
+            function setupTabSystem(tabsContainerId, contentContainerId, data) {
+                const tabsContainer = document.getElementById(tabsContainerId);
+                const contentContainer = document.getElementById(contentContainerId);
+
+                tabsContainer.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'BUTTON') {
+                        // Update tabs
+                        tabsContainer.querySelector('.active').classList.remove('active');
+                        e.target.classList.add('active');
+                        
+                        // Update content
+                        const targetId = e.target.dataset.target;
+                        const skillData = data[targetId];
+                        contentContainer.innerHTML = `
+                            <h4 class="text-xl font-bold text-blue-800 mb-3">${skillData.title}</h4>
+                            <p class="text-gray-600 mb-4">${skillData.content}</p>
+                            <p class="text-sm font-medium text-gray-500 mb-4">${skillData.tools}</p>
+                            <div class="p-3 bg-blue-50 text-blue-800 rounded-lg">${skillData.exercise}</div>
+                        `;
+                    }
+                });
+                // Initial load
+                tabsContainer.querySelector('.active').click();
+            }
+
+            setupTabSystem('hard-skills-tabs', 'hard-skills-content', hardSkillsData);
+            setupTabSystem('soft-skills-tabs', 'soft-skills-content', softSkillsData);
+
+            // Radar Chart Logic
+            const roleData = {
+                content: {
+                    data: [5, 2, 4, 3, 5, 4, 3, 2],
+                    description: 'Tập trung mạnh vào Sáng tạo Nội dung và Đồng cảm. Kỹ năng Phân tích Dữ liệu và Công cụ Digital ít quan trọng hơn.'
+                },
+                performance: {
+                    data: [5, 5, 2, 3, 2, 4, 3, 5],
+                    description: 'Yêu cầu cao nhất về Phân tích Dữ liệu và Công cụ Digital. Khả năng thích ứng với các thay đổi của nền tảng là cực kỳ quan trọng.'
+                },
+                seo: {
+                    data: [4, 5, 3, 5, 3, 4, 2, 5],
+                    description: 'Cần chuyên sâu về Công cụ Digital (Ahrefs, SEMrush) và Nghiên cứu Thị trường (từ khóa). Kỹ năng Thuyết trình ít được yêu cầu hơn.'
+                },
+                manager: {
+                    data: [4, 4, 4, 5, 4, 5, 5, 4],
+                    description: 'Đòi hỏi sự cân bằng ở tất cả các kỹ năng, đặc biệt là kỹ năng mềm như Giao tiếp, Thuyết trình và Nghiên cứu chiến lược.'
+                }
+            };
+
+            const radarCtx = document.getElementById('role-skill-chart').getContext('2d');
+            const roleSkillChart = new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Sáng tạo Nội dung', 'Công cụ Digital', 'Nghiên cứu Thị trường', 'Phân tích Dữ liệu', 'Đồng cảm', 'Giao tiếp', 'Thuyết trình', 'Thích ứng'],
+                    datasets: [{
+                        label: 'Mức độ yêu cầu',
+                        data: roleData.content.data,
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            pointLabels: { font: { size: 12 }, color: '#4b5563'},
+                            ticks: {
+                                backdropColor: 'white',
+                                stepSize: 1,
+                                max: 5,
+                                min: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) { return label.join(' '); }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const roleSelector = document.getElementById('role-selector');
+            const roleDescription = document.getElementById('role-description');
+
+            function updateRadarChart() {
+                const selectedRole = roleSelector.value;
+                roleSkillChart.data.datasets[0].data = roleData[selectedRole].data;
+                roleSkillChart.update();
+                roleDescription.textContent = roleData[selectedRole].description;
+            }
+
+            roleSelector.addEventListener('change', updateRadarChart);
+            // Initial load for radar chart
+            updateRadarChart();
+        });
+    </script>
+</body>
+</html>

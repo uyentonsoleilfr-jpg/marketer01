@@ -52,7 +52,7 @@
         .section-title {
             font-size: 2.5rem;
             font-weight: 900;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0;
             text-align: center;
         }
         .skill-tab {
@@ -86,7 +86,7 @@
 
         <section class="mb-16">
             <h2 class="section-title gradient-text">Hai Nửa Của Một Marketer Chuyên Nghiệp</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
                 <div class="card text-center">
                     <div class="text-6xl mb-4">🛠️</div>
                     <h3 class="text-3xl font-bold text-blue-900 mb-2">Kỹ Năng Cứng (Hard Skills)</h3>
@@ -102,7 +102,7 @@
 
         <section class="mb-16">
             <h2 class="section-title gradient-text">Khám Phá Chi Tiết Từng Kỹ Năng</h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">Chọn một kỹ năng để xem định nghĩa, ví dụ và bài tập thực hành nhỏ.</p>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mt-6 mb-12">Chọn một kỹ năng để xem định nghĩa, ví dụ và bài tập thực hành nhỏ.</p>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Hard Skills Section -->
@@ -136,7 +136,7 @@
 
         <section class="mb-16">
             <h2 class="section-title gradient-text">Vị Trí Nào Phù Hợp Với Bạn?</h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Mỗi vị trí trong ngành Marketing đòi hỏi một bộ kỹ năng với các trọng số khác nhau. Hãy chọn một vị trí để xem "hình dạng" kỹ năng yêu cầu và khám phá xem đâu là thế mạnh của bạn.</p>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mt-6 mb-8">Mỗi vị trí trong ngành Marketing đòi hỏi một bộ kỹ năng với các trọng số khác nhau. Hãy chọn một vị trí để xem "hình dạng" kỹ năng yêu cầu và khám phá xem đâu là thế mạnh của bạn.</p>
             <div class="card">
                 <div class="flex flex-col md:flex-row items-center gap-8">
                     <div class="w-full md:w-1/3">
@@ -162,7 +162,7 @@
         
         <section class="mb-16">
             <h2 class="section-title gradient-text">Kế Hoạch Phát Triển Kỹ Năng Trong 30 Ngày</h2>
-            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Đây là một lộ trình mẫu giúp bạn rèn luyện có cấu trúc. Hãy tùy chỉnh để phù hợp với mục tiêu của riêng bạn.</p>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mt-6 mb-8">Đây là một lộ trình mẫu giúp bạn rèn luyện có cấu trúc. Hãy tùy chỉnh để phù hợp với mục tiêu của riêng bạn.</p>
             <div class="card overflow-x-auto">
                 <table class="w-full text-left">
                     <thead class="bg-gray-50 text-gray-600">
@@ -283,7 +283,9 @@
                     }
                 });
                 // Initial load
-                tabsContainer.querySelector('.active').click();
+                if (tabsContainer.querySelector('.active')) {
+                    tabsContainer.querySelector('.active').click();
+                }
             }
 
             setupTabSystem('hard-skills-tabs', 'hard-skills-content', hardSkillsData);
@@ -296,15 +298,15 @@
                     description: 'Tập trung mạnh vào Sáng tạo Nội dung và Đồng cảm. Kỹ năng Phân tích Dữ liệu và Công cụ Digital ít quan trọng hơn.'
                 },
                 performance: {
-                    data: [5, 5, 2, 3, 2, 4, 3, 5],
+                    data: [2, 5, 3, 5, 2, 4, 3, 5],
                     description: 'Yêu cầu cao nhất về Phân tích Dữ liệu và Công cụ Digital. Khả năng thích ứng với các thay đổi của nền tảng là cực kỳ quan trọng.'
                 },
                 seo: {
-                    data: [4, 5, 3, 5, 3, 4, 2, 5],
+                    data: [3, 5, 5, 4, 3, 4, 2, 5],
                     description: 'Cần chuyên sâu về Công cụ Digital (Ahrefs, SEMrush) và Nghiên cứu Thị trường (từ khóa). Kỹ năng Thuyết trình ít được yêu cầu hơn.'
                 },
                 manager: {
-                    data: [4, 4, 4, 5, 4, 5, 5, 4],
+                    data: [4, 4, 5, 4, 4, 5, 5, 4],
                     description: 'Đòi hỏi sự cân bằng ở tất cả các kỹ năng, đặc biệt là kỹ năng mềm như Giao tiếp, Thuyết trình và Nghiên cứu chiến lược.'
                 }
             };
